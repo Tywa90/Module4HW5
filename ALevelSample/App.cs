@@ -18,7 +18,6 @@ public class App
 
     public async Task Start()
     {
-        /*var data = await _dbContext.Pets.ToListAsync();*/
         var query = await _dbContext.Pets
             .Join(_dbContext.Category, p => p.CategoryId, c => c.Id, (p, c) => new
             {
@@ -52,10 +51,5 @@ public class App
                 Count = g.Count(),
             })
             .ToListAsync();
-
-        foreach (var item in query)
-        {
-            await Console.Out.WriteLineAsync($"{item}");
-        }
     }
 }
