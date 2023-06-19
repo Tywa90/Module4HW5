@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ALevelSample.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230613082343_InitialCreates1")]
-    partial class InitialCreates1
+    [Migration("20230619134047_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,11 +85,8 @@ namespace ALevelSample.Migrations
 
             modelBuilder.Entity("ALevelSample.Data.Entities.PetEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<float>("Age")
                         .HasMaxLength(255)

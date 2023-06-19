@@ -4,7 +4,7 @@ namespace ALevelSample.Data.Entities;
 
 public class PetEntity
 {
-    public int Id { get; set; }
+    public string Id { get; set; } = null!;
     public string? Name { get; set; }
     public int CategoryId { get; set; }
     public CategoryEntity? Category { get; set; }

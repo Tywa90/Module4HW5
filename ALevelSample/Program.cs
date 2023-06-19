@@ -1,5 +1,9 @@
 ﻿using ALevelSample;
 using ALevelSample.Data;
+using ALevelSample.Repositories;
+using ALevelSample.Repositories.Abstractions;
+using ALevelSample.Services;
+using ALevelSample.Services.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,11 +12,17 @@ using Microsoft.Extensions.Logging;
 void ConfigureServices(ServiceCollection serviceCollection, IConfiguration configuration)
 {
     var connectionString = configuration.GetConnectionString("DefaultConnection");
-    serviceCollection.AddDbContext<ApplicationDbContext>(opts
+    serviceCollection.AddDbContextFactory<ApplicationDbContext>(opts
         => opts.UseSqlServer(connectionString));
+    serviceCollection.AddScoped<IDbContextWrapper<ApplicationDbContext>, DbContextWrapper<ApplicationDbContext>>();
 
     serviceCollection
         .AddLogging(configure => configure.AddConsole())
+        .AddTransient<IPetService, PetService>()
+        .AddTransient<IPetRepository, PetRepository>()
+        .AddTransient<ILocationService, LocationService>()
+        .AddTransient<ILocationRepository, LocationRepository>()
+        .AddTransient<INotificationService, NotificationService>()
         .AddTransient<App>();
 }
 

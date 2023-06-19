@@ -4,7 +4,7 @@
 
 namespace ALevelSample.Migrations
 {
-    public partial class InitialCreates1 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,7 +58,7 @@ namespace ALevelSample.Migrations
                 name: "Pets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     BreedID = table.Column<int>(type: "int", nullable: false),

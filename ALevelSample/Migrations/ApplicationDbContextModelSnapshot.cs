@@ -83,11 +83,8 @@ namespace ALevelSample.Migrations
 
             modelBuilder.Entity("ALevelSample.Data.Entities.PetEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<float>("Age")
                         .HasMaxLength(255)
