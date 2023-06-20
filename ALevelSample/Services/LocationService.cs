@@ -54,5 +54,23 @@ namespace ALevelSample.Services
                 LocationName = location.LocationName,
             };
         }
+
+        public async Task<Location> UpdateLocation(Location oldLocation, string updateName)
+        {
+            var location = await _locationRepository.UpdateLocationAsync(oldLocation.Id, updateName);
+
+            if (location == null)
+            {
+                _loggerService.LogWarning($"Not founded location with Id = {oldLocation.Id}");
+                return null!;
+            }
+
+            _loggerService.LogWarning($"Update location name {oldLocation.LocationName} to {location.LocationName}");
+            return new Location()
+            {
+                Id = location.Id,
+                LocationName = location.LocationName
+            };
+        }
     }
 }

@@ -34,6 +34,7 @@ public class App
         var locationId = await _locationService.AddLocation(locationName);
 
         var location = await _locationService.GetLocation(locationId);
+        var updateLocation = await _locationService.UpdateLocation(location, "Spain");
 
         var categoryId1 = await _categoryService.AddCategory("Dog");
         var categoryId2 = await _categoryService.AddCategory("Cat");

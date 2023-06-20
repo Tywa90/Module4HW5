@@ -11,5 +11,6 @@ namespace ALevelSample.Repositories.Abstractions
     {
         Task<int> AddLocationAsync(string locationName);
         Task<LocationEntity?> GetLocationAsync(int id);
+        Task<LocationEntity?> UpdateLocationAsync(int id, string updateLocation);
     }
 }

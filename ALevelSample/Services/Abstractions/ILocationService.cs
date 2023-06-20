@@ -11,5 +11,6 @@ namespace ALevelSample.Services.Abstractions
     {
         Task<int> AddLocation(string location);
         Task<Location> GetLocation(int id);
+        Task<Location> UpdateLocation(Location oldLocation, string updateName);
     }
 }
