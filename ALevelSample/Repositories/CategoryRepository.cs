@@ -39,5 +39,21 @@ namespace ALevelSample.Repositories
         {
             return await _dbContext.Category.FirstOrDefaultAsync(f => f.Id == id);
         }
+
+        public async Task<bool> DeleteCategoryAsync(int id)
+        {
+            var category = await _dbContext.Category.FirstOrDefaultAsync(f => f.Id == id);
+
+            if (category == null)
+            {
+                return false;
+            }
+            else
+            {
+                _dbContext.Category.Remove(category);
+                _dbContext.SaveChanges();
+                return true;
+            }
+        }
     }
 }

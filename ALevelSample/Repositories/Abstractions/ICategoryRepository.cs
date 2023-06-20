@@ -11,5 +11,6 @@ namespace ALevelSample.Repositories.Abstractions
     {
         Task<int> AddCategoryAsync(string categoryName);
         Task<CategoryEntity?> GetCategoryAsync(int id);
+        Task<bool> DeleteCategoryAsync(int id);
     }
 }

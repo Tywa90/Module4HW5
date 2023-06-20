@@ -46,6 +46,9 @@ public class App
 
         var petId = await _petService.AddPet("Reks",  8, "www.pet.com", "Some description");
 
+        var getCategory = await _categoryService.GetCategory(categoryId1);
+        var deleteCategory = await _categoryService.DeleteCategory(getCategory);
+
         // var query = await _dbContext.Pets
         //    .Join(_dbContext.Category, p => p.CategoryId, c => c.Id, (p, c) => new
         //    {
