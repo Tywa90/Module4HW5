@@ -14,15 +14,18 @@ public class App
     private readonly ILocationService _locationService;
     private readonly ICategoryService _categoryService;
     private readonly IBreedService _breedService;
+    private readonly IPetService _petService;
 
     public App(
         ILocationService locationService,
         ICategoryService categoryService,
-        IBreedService breedService)
+        IBreedService breedService,
+        IPetService petService)
     {
         _locationService = locationService;
         _categoryService = categoryService;
         _breedService = breedService;
+        _petService = petService;
     }
 
     public async Task Start()
@@ -30,13 +33,17 @@ public class App
         var locationName = "Ukraine";
         var locationId = await _locationService.AddLocation(locationName);
 
-        await _locationService.GetLocation(locationId);
+        var location = await _locationService.GetLocation(locationId);
 
         var categoryId1 = await _categoryService.AddCategory("Dog");
         var categoryId2 = await _categoryService.AddCategory("Cat");
 
         var breedId1 = await _breedService.AddBreed("Mops", categoryId1);
         var breedId2 = await _breedService.AddBreed("Scotish", categoryId2);
+
+        var breed = await _breedService.GetBreed(breedId1);
+
+        var petId = await _petService.AddPet("Reks",  8, "www.pet.com", "Some description");
 
         // var query = await _dbContext.Pets
         //    .Join(_dbContext.Category, p => p.CategoryId, c => c.Id, (p, c) => new

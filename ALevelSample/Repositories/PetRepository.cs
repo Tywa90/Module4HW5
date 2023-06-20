@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ALevelSample.Data;
 using ALevelSample.Data.Entities;
+using ALevelSample.Models;
 using ALevelSample.Repositories.Abstractions;
 using ALevelSample.Services.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -21,12 +22,18 @@ namespace ALevelSample.Repositories
             _dbContext = dbContextWrapper.DbContext;
         }
 
-        public async Task<string> AddPetAsync(string firstName)
+        public async Task<string> AddPetAsync(string petName, int age, string url, string description)
         {
             var pet = new PetEntity()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = firstName
+                Name = petName,
+                CategoryId = _dbContext.Breeds.Where(b => b.Id > 0).Select(b => b.CategoryId).First(),
+                BreedID = _dbContext.Breeds.Where(b => b.Id > 0).Select(b => b.Id).First(),
+                Age = age,
+                LocationId = _dbContext.Location.Where(b => b.Id > 0).Select(b => b.Id).First(),
+                ImageUrl = url,
+                Description = description
             };
 
             await _dbContext.Pets.AddAsync(pet);

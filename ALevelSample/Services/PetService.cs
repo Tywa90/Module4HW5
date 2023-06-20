@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ALevelSample.Data;
 using ALevelSample.Data.Entities;
 using ALevelSample.Models;
+using ALevelSample.Repositories;
 using ALevelSample.Repositories.Abstractions;
 using ALevelSample.Services.Abstractions;
 using Microsoft.Extensions.Logging;
@@ -26,6 +27,16 @@ namespace ALevelSample.Services
         {
             _petRepository = petRepository;
             _loggerService = loggerService;
+        }
+
+        public async Task<string> AddPet(string petName, int age, string url, string description)
+        {
+            return await ExecuteSafeAsync(async () =>
+            {
+                var id = await _petRepository.AddPetAsync(petName, age, url, description);
+                _loggerService.LogInformation($"Created pet with Id = {id}");
+                return id;
+            });
         }
 
         public async Task<Pet> GetPet(string id)
