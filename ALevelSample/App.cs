@@ -12,16 +12,25 @@ namespace ALevelSample;
 public class App
 {
     private readonly ILocationService _locationService;
+    private readonly ICategoryService _categoryService;
 
-    public App(ILocationService locationService)
+    public App(
+        ILocationService locationService,
+        ICategoryService categoryService)
     {
         _locationService = locationService;
+        _categoryService = categoryService;
     }
 
     public async Task Start()
     {
         var locationName = "Ukraine";
         var locationId = await _locationService.AddLocation(locationName);
+
+        await _locationService.GetLocation(locationId);
+
+        var categoryId1 = await _categoryService.AddCategory("Dog");
+        var categoryId2 = await _categoryService.AddCategory("Cat");
 
         // var query = await _dbContext.Pets
         //    .Join(_dbContext.Category, p => p.CategoryId, c => c.Id, (p, c) => new

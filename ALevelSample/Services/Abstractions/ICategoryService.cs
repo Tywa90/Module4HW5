@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ALevelSample.Models;
 
 namespace ALevelSample.Services.Abstractions
 {
-    public interface INotificationService
+    public interface ICategoryService
     {
-        void Notify(NotifyType type, string massage, string to);
+        Task<int> AddCategory(string category);
     }
 }

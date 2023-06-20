@@ -7,9 +7,9 @@ using ALevelSample.Data.Entities;
 
 namespace ALevelSample.Repositories.Abstractions
 {
-    public interface ILocationRepository
+    public interface ICategoryRepository
     {
-        Task<int> AddLocationAsync(string locationName);
-        Task<LocationEntity?> GetLocationAsync(int id);
+        Task<int> AddCategoryAsync(string categoryName);
+        Task<CategoryEntity?> GetCategoryAsync(int id);
     }
 }

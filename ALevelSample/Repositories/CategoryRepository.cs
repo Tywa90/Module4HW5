@@ -3,41 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ALevelSample.Data;
 using ALevelSample.Data.Entities;
-using ALevelSample.Repositories.Abstractions;
+using ALevelSample.Data;
 using ALevelSample.Services.Abstractions;
+using ALevelSample.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace ALevelSample.Repositories
 {
-    public class LocationRepository : ILocationRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public LocationRepository(
+        public CategoryRepository(
         IDbContextWrapper<ApplicationDbContext> dbContextWrapper)
         {
             _dbContext = dbContextWrapper.DbContext;
         }
 
-        public async Task<int> AddLocationAsync(string locationName)
+        public async Task<int> AddCategoryAsync(string categoryName)
         {
-            var location = new LocationEntity()
+            var category = new CategoryEntity()
             {
                 Id = Guid.NewGuid().GetHashCode(),
-                LocationName = locationName
+                CategoryName = categoryName
             };
 
-            await _dbContext.Location.AddAsync(location);
+            await _dbContext.Category.AddAsync(category);
             await _dbContext.SaveChangesAsync();
 
-            return location.Id;
+            return category.Id;
         }
 
-        public async Task<LocationEntity?> GetLocationAsync(int id)
+        public async Task<CategoryEntity?> GetCategoryAsync(int id)
         {
-            return await _dbContext.Location.FirstOrDefaultAsync(f => f.Id == id);
+            return await _dbContext.Category.FirstOrDefaultAsync(f => f.Id == id);
         }
     }
 }

@@ -15,19 +15,16 @@ namespace ALevelSample.Services
     public class PetService : BaseDataService<ApplicationDbContext>, IPetService
     {
         private readonly IPetRepository _petRepository;
-        private readonly INotificationService _notificationService;
         private readonly ILogger<PetService> _loggerService;
 
         public PetService(
         IDbContextWrapper<ApplicationDbContext> dbContextWrapper,
         ILogger<BaseDataService<ApplicationDbContext>> logger,
         IPetRepository petRepository,
-        INotificationService notificationService,
         ILogger<PetService> loggerService)
         : base(dbContextWrapper, logger)
         {
             _petRepository = petRepository;
-            _notificationService = notificationService;
             _loggerService = loggerService;
         }
 

@@ -15,19 +15,16 @@ namespace ALevelSample.Services
     public class LocationService : BaseDataService<ApplicationDbContext>, ILocationService
     {
         private readonly ILocationRepository _locationRepository;
-        private readonly INotificationService _notificationService;
         private readonly ILogger<LocationService> _loggerService;
 
         public LocationService(
         IDbContextWrapper<ApplicationDbContext> dbContextWrapper,
         ILogger<BaseDataService<ApplicationDbContext>> logger,
         ILocationRepository locationRepository,
-        INotificationService notificationService,
         ILogger<LocationService> loggerService)
         : base(dbContextWrapper, logger)
         {
             _locationRepository = locationRepository;
-            _notificationService = notificationService;
             _loggerService = loggerService;
         }
 
@@ -37,11 +34,25 @@ namespace ALevelSample.Services
             {
                 var id = await _locationRepository.AddLocationAsync(firstName);
                 _loggerService.LogInformation($"Created location with Id = {id}");
-                var notifyMassage = "registration was successful";
-                var notifyTo = "user@gmail.com";
-                _notificationService.Notify(NotifyType.Email, notifyMassage, notifyTo);
                 return id;
             });
+        }
+
+        public async Task<Location> GetLocation(int id)
+        {
+            var location = await _locationRepository.GetLocationAsync(id);
+
+            if (location == null)
+            {
+                _loggerService.LogWarning($"Not founded location with Id = {id}");
+                return null!;
+            }
+
+            return new Location()
+            {
+                Id = location.Id,
+                LocationName = location.LocationName,
+            };
         }
     }
 }

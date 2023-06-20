@@ -22,7 +22,8 @@ void ConfigureServices(ServiceCollection serviceCollection, IConfiguration confi
         .AddTransient<IPetRepository, PetRepository>()
         .AddTransient<ILocationService, LocationService>()
         .AddTransient<ILocationRepository, LocationRepository>()
-        .AddTransient<INotificationService, NotificationService>()
+        .AddTransient<ICategoryService, CategoryService>()
+        .AddTransient<ICategoryRepository, CategoryRepository>()
         .AddTransient<App>();
 }
 
