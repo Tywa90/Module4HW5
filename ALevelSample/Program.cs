@@ -24,6 +24,8 @@ void ConfigureServices(ServiceCollection serviceCollection, IConfiguration confi
         .AddTransient<ILocationRepository, LocationRepository>()
         .AddTransient<ICategoryService, CategoryService>()
         .AddTransient<ICategoryRepository, CategoryRepository>()
+        .AddTransient<IBreedService, BreedService>()
+        .AddTransient<IBreedRepository, BreedRepository>()
         .AddTransient<App>();
 }
 
