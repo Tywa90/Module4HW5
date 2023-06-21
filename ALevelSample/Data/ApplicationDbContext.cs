@@ -15,6 +15,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<CategoryEntity> Category { get; set; } = null!;
     public DbSet<BreedEntity> Breeds { get; set; } = null!;
     public DbSet<LocationEntity> Location { get; set; } = null!;
+    public DbSet<Task2QueryEntity> Task2Query { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -22,6 +23,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CategoryEntityConfiguration());
         modelBuilder.ApplyConfiguration(new BreedEntityConfiguration());
         modelBuilder.ApplyConfiguration(new LocationEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new Task2QueryEntityConfiguration());
         modelBuilder.UseHiLo();
     }
 }

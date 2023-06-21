@@ -15,17 +15,20 @@ public class App
     private readonly ICategoryService _categoryService;
     private readonly IBreedService _breedService;
     private readonly IPetService _petService;
+    private readonly ITask2QueryService _task2QueryService;
 
     public App(
         ILocationService locationService,
         ICategoryService categoryService,
         IBreedService breedService,
-        IPetService petService)
+        IPetService petService,
+        ITask2QueryService task2QueryService)
     {
         _locationService = locationService;
         _categoryService = categoryService;
         _breedService = breedService;
         _petService = petService;
+        _task2QueryService = task2QueryService;
     }
 
     public async Task Start()
@@ -44,43 +47,11 @@ public class App
 
         var breed = await _breedService.GetBreed(breedId1);
 
-        var petId = await _petService.AddPet("Reks",  8, "www.pet.com", "Some description");
+        var petId = await _petService.AddPet("Reks", 8, "www.pet.com", "Some description");
 
         var getCategory = await _categoryService.GetCategory(categoryId1);
         var deleteCategory = await _categoryService.DeleteCategory(getCategory);
 
-        // var query = await _dbContext.Pets
-        //    .Join(_dbContext.Category, p => p.CategoryId, c => c.Id, (p, c) => new
-        //    {
-        //        CategoryName = c.CategoryName,
-        //        Age = p.Age,
-        //        BreedID = p.BreedID,
-        //        LocationId = p.LocationId,
-        //    })
-        //    .Join(_dbContext.Breeds, d => d.BreedID, b => b.Id, (d, b) => new
-        //    {
-        //        CategoryName = d.CategoryName,
-        //        Age = d.Age,
-        //        BreedName = b.BreedName,
-        //        LocationId = d.LocationId,
-        //    })
-        //    .Join(_dbContext.Location, e => e.LocationId, l => l.Id, (e, l) => new
-        //    {
-        //        CategoryName = e.CategoryName,
-        //        Age = e.Age,
-        //        BreedName = e.BreedName,
-        //        LocationName = l.LocationName,
-        //    })
-        //    .Where(pet => pet.Age > 3 && EF.Functions.Like(pet.LocationName!, "%Ukraine%"))
-        //    .GroupBy(pet => new
-        //    {
-        //        pet.CategoryName, pet.BreedName
-        //    })
-        //    .Select(g => new
-        //    {
-        //        BreedNameCount = g.Key.BreedName,
-        //        Count = g.Count(),
-        //    })
-        //    .ToListAsync();
+        var newQuery = await _task2QueryService.RunTask2(locationName);
     }
 }

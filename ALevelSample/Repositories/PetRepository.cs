@@ -28,10 +28,10 @@ namespace ALevelSample.Repositories
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = petName,
-                CategoryId = _dbContext.Breeds.Where(b => b.Id > 0).Select(b => b.CategoryId).First(),
-                BreedID = _dbContext.Breeds.Where(b => b.Id > 0).Select(b => b.Id).First(),
+                CategoryId = _dbContext.Breeds.Where(b => b.Id > 0).Select(b => b.CategoryId).FirstOrDefault(),
+                BreedID = _dbContext.Breeds.Where(b => b.Id > 0).Select(b => b.Id).FirstOrDefault(),
                 Age = age,
-                LocationId = _dbContext.Location.Where(b => b.Id > 0).Select(b => b.Id).First(),
+                LocationId = _dbContext.Location.Where(b => b.Id > 0).Select(b => b.Id).FirstOrDefault(),
                 ImageUrl = url,
                 Description = description
             };
